@@ -24,12 +24,13 @@ In magnitude-based weight pruning, model weights having values less than thresho
 
 ### Clustering
 Clustering, also called as weight sharing, helps to make models more memory-efficient by reducing the number of different weights values. In this process, weights of each layers are grouped into clusters. Within each cluster, all model weights share the same value which is known as centroid value of the cluster.
-![Picture7](https://github.com/alishafique3/Efficient-Machine-Learning_Optimizations-and-Benchmarking/assets/17300597/8354eded-8734-4937-96f1-62d27f7da053)
+![Picture7](https://github.com/alishafique3/Efficient-Machine-Learning_Optimizations-and-Benchmarking/assets/17300597/fe7aa3ae-19ad-4f06-90d7-00de0be3e9a5)
 
 
 ### Quantization
 In Quantization, precision of of model weights, activation, input and output is decreased by reducing the the number of bits to represent numerical values. Using lower precision such as FP16 or INT8 as compared to FP32 makes the model memory-efficient and helps in faster execution. In this technique, high-precision values are mapped into lower-precision values using quantization-aware training, post-training quantization or hybrid quantization which is combination of both. Quantization is helpful for deploying models in resource-constraied edge devices as it reduces computational and memory requirements with very small decrease in accuracy.
-![Picture6](https://github.com/alishafique3/Efficient-Machine-Learning_Optimizations-and-Benchmarking/assets/17300597/1ea4a90f-2308-4ecc-928f-d70856654eb8)
+![Picture6](https://github.com/alishafique3/Efficient-Machine-Learning_Optimizations-and-Benchmarking/assets/17300597/7d94bbe6-5934-4499-a4da-f4a2076f8438)
+
 
 ## Methodology
 Base code for model training and dataset is provided in the [blog](https://www.pyimagesearch.com/2019/11/18/fire-and-smoke-detection-with-keras-and-deep-learning/) at Pyimagesearch by Adrian Rosebrock on November 18, 2019. 
