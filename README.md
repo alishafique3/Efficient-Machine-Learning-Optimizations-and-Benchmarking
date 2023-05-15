@@ -1,11 +1,14 @@
 # Efficient Machine Learning: Optimizations and Benchmarking
-Deep learning is becoming popular nowadays. It is being used in different applications like classification, segmentation, pose estimation, augmented reality and self-driving cars. The primary goal in deep learning applications is to achieve accuracy. This can be done using big models but these complex models leads several issues in real time applications. These real-time applications run on edge devices but large models put constraints on memory and latency. Pruning, clustering and quantization techniques can be used to optimize the models. Optimized models lead to efficient use of memory and simpler computations on edge devices which results in following advantages
-1. Memory Usage: using INT8 for input, weights, activations, and output leads to less use of memory
-2. Power Consumption: less memory access and simpler computation reduce power consumption significantly
-3. Latency: less memory access and simpler computation also speed up faster inference
-4. Silicon Area: Integer or low-bits computation require less silicon area for hardware as compared to floating bits or more bits
+Deep learning is becoming popular nowadays. It is being used in different applications such as classification, segmentation, pose estimation, augmented reality and self-driving cars. The primary goal in deep learning applications is to achieve accuracy. This can be accomplished using big models but these complex models give rise to several issues in real-time applications. These real-time applications run on edge devices with limited memory and computation resources that results in reduction of model inference performance. 
 
-TensorFlow Lite benchmark tools currently measure and calculate statistics for the following important performance metrics:
+Model inference can be improved using optimization techniques such as pruning, clustering and quantization. Optimized models enable efficient use of memory and simple computations, thereby resulting in the following advantages
+
+1. Memory Usage: using Integer or low-bits bits for input, weights, activations, and output give rise to less use of memory
+2. Power Consumption: less memory access and simpler computation reduce power consumption significantly
+3. Latency: less memory access and simpler computation also speed up the inference
+4. Silicon Area: Integer or low-bits require less silicon area for computational hardware as compared to floating bits
+
+In this project, tensorflow keras is used to develop and train CNN model for classifiying fire and non-fire dataset. Model is optimized using tensorflow model optimization library. Optimized model is then converted into Tensorlite format. The performance of Tensorlite model is bechmarked on Android device using TensorFlow Lite benchmark tools. These tools measure several important performance metrics:
 * Initialization time
 * Inference time of warmup state
 * Inference time of steady state
@@ -25,7 +28,7 @@ Clustering, also known as weight sharing, helps make models more efficient for d
 
 
 ### Quantization
-Quantization in machine learning refers to reducing the precision or range of numerical values used to represent a model's parameters or weights. It compresses models, making them more memory-efficient and faster to execute. It involves mapping high-precision values to lower-precision representations and can be done through post-training quantization, quantization-aware training, or a combination of both. Quantization is beneficial for deploying models on resource-constrained devices, as it reduces memory and computational requirements while maintaining acceptable accuracy.
+In Quantization, precision of of model weights, activation, input and output is decreased by reducing the the number of bits to represent numerical values. Using lower precision such as FP16 or INT8 as compared to FP32 makes the model memory-efficient and helps in faster execution. In this technique, high-precision values are mapped into lower-precision values using quantization-aware training, post-training quantization or hybrid quantization which is combination of both. Quantization is helpful for deploying models in resource-constraied edge devices as it reduces computational and memory requirements with very small decrease in accuracy.
 ![Picture6](https://github.com/alishafique3/Efficient-Machine-Learning_Optimizations-and-Benchmarking/assets/17300597/1ea4a90f-2308-4ecc-928f-d70856654eb8)
 
 ## Methodology
