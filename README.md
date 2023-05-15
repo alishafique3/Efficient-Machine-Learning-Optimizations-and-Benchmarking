@@ -17,13 +17,13 @@ In this project, tensorflow keras is used to develop and train CNN model for cla
 
 ## Description of Optimization
 ### Magnitude-based weight pruning
-Gradually zeroes out model weights during the training process to achieve model sparsity. Sparse models are easier to compress, and we can skip the zeroes during inference for latency improvements. In unstructured pruning, individual weight connections are removed from a network by setting them to 0. In structured pruning, groups of weight connections are removed together, such as entire channels or filters. Unfortunately, structured pruning severely limits the maximum sparsity that limits both the performance and memory. improvements.
+In magnitude-based weight pruning, model weights having values less than threshold, are made zero during training process. It develops sparsity in the model which helps in model compression. We can also skip those zero weights during inference resulting improvement in latency. In unstructured pruning, individual weight connections are removed from a network by setting them to 0. In structured pruning, groups of weight connections are removed together, such as entire channels or filters. Unfortunately, structured pruning severely limits the maximum sparsity that limits both the performance and memory. improvements.
 
 ![Picture8](https://github.com/alishafique3/Efficient-Machine-Learning_Optimizations-and-Benchmarking/assets/17300597/e4fe8f1c-6cdc-468d-b14d-af51bf0206da)
 
 
 ### Clustering
-Clustering, also known as weight sharing, helps make models more efficient for deployment by reducing the number of different weight values they contain. The process involves grouping the weights of each layer into clusters. Within each cluster, all the weights share the same value, known as the cluster's centroid value.
+Clustering, also called as weight sharing, helps to make models more memory-efficient by reducing the number of different weights values. In this process, weights of each layers are grouped into clusters. Within each cluster, all model weights share the same value which is known as centroid value of the cluster.
 ![Picture7](https://github.com/alishafique3/Efficient-Machine-Learning_Optimizations-and-Benchmarking/assets/17300597/8354eded-8734-4937-96f1-62d27f7da053)
 
 
