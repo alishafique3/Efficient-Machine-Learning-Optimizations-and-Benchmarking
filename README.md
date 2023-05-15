@@ -24,7 +24,8 @@ In magnitude-based weight pruning, model weights having values less than thresho
 
 ### Clustering
 Clustering, also called as weight sharing, helps to make models more memory-efficient by reducing the number of different weights values. In this process, weights of each layers are grouped into clusters. Within each cluster, all model weights share the same value which is known as centroid value of the cluster.
-![Picture7](https://github.com/alishafique3/Efficient-Machine-Learning_Optimizations-and-Benchmarking/assets/17300597/fe7aa3ae-19ad-4f06-90d7-00de0be3e9a5)
+![Picture7](https://github.com/alishafique3/Efficient-Machine-Learning_Optimizations-and-Benchmarking/assets/17300597/49b43d76-5dbf-44e2-a9e9-a9fdfba8f065)
+
 
 
 ### Quantization
