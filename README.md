@@ -37,7 +37,13 @@ This project has contributed to the following:
 
 
 ### Step1: Loading and preprocessing of the dataset
-A dataset can be accessed either by uploading it in the drive of google colab or google drive. In this project, the dataset has been uploaded on google drive and it is accessed in the code by mounting google drive in Colab. 
+A dataset can be accessed either by uploading it in the drive of google colab or google drive. In this project, the dataset has been uploaded on google drive and it is accessed in the code by mounting google drive in Colab.
+| Tables        | Are           | Cool  |
+| ------------- |:-------------:| -----:|
+| col 3 is      | right-aligned | $1600 |
+| col 2 is      | centered      |   $12 |
+| zebra stripes | are neat      |    $1 |
+
 
 ### Step2: Model architecture and training
 A deep neural network is used for classification. It contains convolutional layers, max pooling, and batch normalization layers. Adam optimizer is used for training with binary cross entropy loss function. It is trained for 50 epochs. Four different models are trained with different optimizations.
