@@ -1,5 +1,9 @@
 # Efficient Machine Learning: Optimizations and Benchmarking
-Deep learning is becoming popular nowadays. It is being used in different applications like classification, segmentation, pose estimation, augmented reality and self-driving cars. Primary goal in deep learning applications is to achieve accuracy. This can be done using big models but these complex models leads several issues in real time applications. These real-time applications run on edge devices but large models put constraints on memory and latency.
+Deep learning is becoming popular nowadays. It is being used in different applications like classification, segmentation, pose estimation, augmented reality and self-driving cars. The primary goal in deep learning applications is to achieve accuracy. This can be done using big models but these complex models leads several issues in real time applications. These real-time applications run on edge devices but large models put constraints on memory and latency. Pruning, clustering and quantization techniques can be used to optimize the models. Optimized models lead to efficient use of memory and simpler computations on edge devices which results in following advantages
+1. Memory Usage: using INT8 for input, weights, activations, and output leads to less use of memory
+2. Power Consumption: less memory access and simpler computation reduce power consumption significantly
+3. Latency: less memory access and simpler computation also speed up faster inference
+4. Silicon Area: Integer or low-bits computation require less silicon area for hardware as compared to floating bits or more bits
 
 TensorFlow Lite benchmark tools currently measure and calculate statistics for the following important performance metrics:
 * Initialization time
