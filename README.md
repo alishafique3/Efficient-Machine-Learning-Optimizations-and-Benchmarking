@@ -16,6 +16,9 @@ TensorFlow Lite benchmark tools currently measure and calculate statistics for t
 ### Magnitude-based weight pruning
 Gradually zeroes out model weights during the training process to achieve model sparsity. Sparse models are easier to compress, and we can skip the zeroes during inference for latency improvements. In unstructured pruning, individual weight connections are removed from a network by setting them to 0. In structured pruning, groups of weight connections are removed together, such as entire channels or filters. Unfortunately, structured pruning severely limits the maximum sparsity that limits both the performance and memory. improvements.
 
+![Picture8](https://github.com/alishafique3/Efficient-Machine-Learning_Optimizations-and-Benchmarking/assets/17300597/e4fe8f1c-6cdc-468d-b14d-af51bf0206da)
+
+
 ### Clustering
 Clustering, also known as weight sharing, helps make models more efficient for deployment by reducing the number of different weight values they contain. The process involves grouping the weights of each layer into clusters. Within each cluster, all the weights share the same value, known as the cluster's centroid value.
 ![Picture7](https://github.com/alishafique3/Efficient-Machine-Learning_Optimizations-and-Benchmarking/assets/17300597/8354eded-8734-4937-96f1-62d27f7da053)
