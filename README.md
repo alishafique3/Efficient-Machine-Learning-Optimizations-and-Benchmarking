@@ -11,11 +11,15 @@ TensorFlow Lite benchmark tools currently measure and calculate statistics for t
 ## Description of Optimization
 ### Magnitude-based weight pruning
 Gradually zeroes out model weights during the training process to achieve model sparsity. Sparse models are easier to compress, and we can skip the zeroes during inference for latency improvements. In unstructured pruning, individual weight connections are removed from a network by setting them to 0. In structured pruning, groups of weight connections are removed together, such as entire channels or filters. Unfortunately, structured pruning severely limits the maximum sparsity that limits both the performance and memory. improvements.
+
 ### Clustering
 Clustering, also known as weight sharing, helps make models more efficient for deployment by reducing the number of different weight values they contain. The process involves grouping the weights of each layer into clusters. Within each cluster, all the weights share the same value, known as the cluster's centroid value.
+![Picture7](https://github.com/alishafique3/Efficient-Machine-Learning_Optimizations-and-Benchmarking/assets/17300597/8354eded-8734-4937-96f1-62d27f7da053)
+
 
 ### Quantization
-![Picture6](https://github.com/alishafique3/Efficient-Machine-Learning_Optimizations-and-Benchmarking/assets/17300597/37b70d53-ed37-42e5-b204-c023c69a4903)
+Quantization in machine learning refers to reducing the precision or range of numerical values used to represent a model's parameters or weights. It compresses models, making them more memory-efficient and faster to execute. It involves mapping high-precision values to lower-precision representations and can be done through post-training quantization, quantization-aware training, or a combination of both. Quantization is beneficial for deploying models on resource-constrained devices, as it reduces memory and computational requirements while maintaining acceptable accuracy.
+![Picture6](https://github.com/alishafique3/Efficient-Machine-Learning_Optimizations-and-Benchmarking/assets/17300597/1ea4a90f-2308-4ecc-928f-d70856654eb8)
 
 ## Methodology
 Base code for model training and dataset is provided in the [blog](https://www.pyimagesearch.com/2019/11/18/fire-and-smoke-detection-with-keras-and-deep-learning/) at Pyimagesearch by Adrian Rosebrock on November 18, 2019. 
