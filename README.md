@@ -1,12 +1,12 @@
 # Efficient Machine Learning: Optimizations and Benchmarking
-Deep learning is becoming popular nowadays. It is being used in different applications such as classification, segmentation, pose estimation, augmented reality and self-driving cars. The primary goal in deep learning applications is to achieve accuracy. This can be accomplished using big models but these complex models give rise to several issues in real-time applications. These real-time applications run on edge devices with limited memory and computation resources that results in reduction of model inference performance. 
+Deep learning is becoming popular nowadays. It is being used in different applications such as classification, segmentation, pose estimation, augmented reality and self-driving cars. The primary goal in deep learning applications is to achieve accuracy. This can be accomplished using big models but these complex models give rise to several issues in real-time applications. These real-time applications run on edge devices have limited memory and computation resources that results in reduction of model inference performance. 
 
-Model inference can be improved using optimization techniques such as pruning, clustering and quantization. Optimized models enable efficient use of memory and simple computations, thereby resulting in the following advantages
+Model inference can be improved using optimization techniques such as pruning, clustering and quantization. Optimized models enable efficient use of memory and make computations simple, thereby resulting in the following advantages
 
-1. Memory Usage: using Integer or low-bits bits for input, weights, activations, and output give rise to less use of memory
-2. Power Consumption: less memory access and simpler computation reduce power consumption significantly
-3. Latency: less memory access and simpler computation also speed up the inference
-4. Silicon Area: Integer or low-bits require less silicon area for computational hardware as compared to floating bits
+1. **Memory Usage:** using Integer or low-bits bits for input, weights, activations, and output give rise to less use of memory
+2. **Power Consumption:** less memory access and simpler computation reduce power consumption significantly
+3. **Latency:** less memory access and simpler computation also speed up the inference
+4. **Silicon Area:** Integer or low-bits require less silicon area for computational hardware as compared to floating bits
 
 In this project, tensorflow keras is used to develop and train CNN model for classifiying fire and non-fire dataset. Model is optimized using tensorflow model optimization library. Optimized model is then converted into Tensorlite format. The performance of Tensorlite model is bechmarked on Android device using TensorFlow Lite benchmark tools. These tools measure several important performance metrics:
 * Initialization time
@@ -17,19 +17,19 @@ In this project, tensorflow keras is used to develop and train CNN model for cla
 
 ## Description of Optimization
 ### Magnitude-based weight pruning
-In magnitude-based weight pruning, model weights having values less than threshold, are made zero during training process. It develops sparsity in the model which helps in model compression. We can also skip those zero weights during inference resulting improvement in latency. In unstructured pruning, individual weight connections are removed from a network by setting them to 0. In structured pruning, groups of weight connections are removed together, such as entire channels or filters. Unfortunately, structured pruning severely limits the maximum sparsity that limits both the performance and memory. improvements.
+In magnitude-based weight pruning, model weights, having values less than a threshold, are made zero during the training process. It develops sparsity in the model which helps in model compression. We can also skip those zero weights during inference resulting in an improvement in latency. In unstructured pruning, individual weight connections are removed from a network by setting them to zero. In structured pruning, groups of weight connections are removed together, such as entire channels or filters. Unfortunately, structured pruning severely limits the maximum sparsity that limits both performance and memory improvements.
 
 ![Picture8](https://github.com/alishafique3/Efficient-Machine-Learning_Optimizations-and-Benchmarking/assets/17300597/e4fe8f1c-6cdc-468d-b14d-af51bf0206da)
 
 
 ### Clustering
-Clustering, also called as weight sharing, helps to make models more memory-efficient by reducing the number of different weights values. In this process, weights of each layers are grouped into clusters. Within each cluster, all model weights share the same value which is known as centroid value of the cluster.
+Clustering, also called weight sharing, helps to make models more memory-efficient by reducing the number of different weight values. In this process, the weights of each layer are grouped into clusters. Within each cluster, all model weights share the same value which is known as the centroid value of the cluster.
 ![Picture7](https://github.com/alishafique3/Efficient-Machine-Learning_Optimizations-and-Benchmarking/assets/17300597/49b43d76-5dbf-44e2-a9e9-a9fdfba8f065)
 
 
 
 ### Quantization
-In Quantization, precision of of model weights, activation, input and output is decreased by reducing the the number of bits to represent numerical values. Using lower precision such as FP16 or INT8 as compared to FP32 makes the model memory-efficient and helps in faster execution. In this technique, high-precision values are mapped into lower-precision values using quantization-aware training, post-training quantization or hybrid quantization which is combination of both. Quantization is helpful for deploying models in resource-constraied edge devices as it reduces computational and memory requirements with very small decrease in accuracy.
+In Quantization, precision of the model weights, activation, input and output is decreased by reducing the the number of bits representing numerical values. Using lower precision such as FP16 or INT8 as compared to FP32, makes the model memory-efficient and helps in faster execution. In this technique, high-precision values are mapped into lower-precision values using quantization-aware training, post-training quantization or hybrid quantization which is combination of both. Quantization is helpful for deploying models in resource-constraied edge devices as it reduces computational and memory requirements with acceptable accuracy.
 ![Picture6](https://github.com/alishafique3/Efficient-Machine-Learning_Optimizations-and-Benchmarking/assets/17300597/7d94bbe6-5934-4499-a4da-f4a2076f8438)
 
 
