@@ -197,6 +197,16 @@ You can specify more optional parameters for running the benchmark.
 In this project, different optimized models have been compared on android devices. Dynamic quantization plays remarkably well among these optimized models. This project can be extended on different datasets, models and hardware to see the performance of optimization techniques.
 
 ## References
+1.	Pyimagesearch Website: Fire and smoke detection with keras and deep learning accessed on 4/21/2023 link: https://www.pyimagesearch.com/2019/11/18/fire-and-smoke-detection-with-keras-and-deep-learning/
+2.	Youtube Website: tinyML Talks: A Practical guide to neural network quantization accessed on 5/2/2023 link: tinyML Talks: A Practical Guide to Neural Network Quantization 
+3.	Medium Website: Neural Network Compression using Quantization accessed on 4/27/2023 link: https://medium.com/sharechat-techbyte/neural-network-compression-using-quantization-328d22e8855d
+4.	Tensorflow Website: Performance Measurement accessed on 5/5/2023 link: https://www.tensorflow.org/lite/performance/measurement
+5.	Tensorflow Website: Post Training Quantization accessed on 5/3/2023 link: https://www.tensorflow.org/lite/performance/post_training_quantization#dynamic_range_quantization
+6.	Tensorflow Website: Model Optimization Pruning accessed on 5/3/2023 link: https://www.tensorflow.org/model_optimization/guide/pruning
+7.	Tensorflow Website: Weight clustering accessed on 5/1/2023 link: https://blog.tensorflow.org/2020/08/tensorflow-model-optimization-toolkit-weight-clustering-api.html
+8.	Tensorflow Website: pruning accessed on 5/4/2023 link: https://blog.tensorflow.org/2019/05/tf-model-optimization-toolkit-pruning-API.html
+9.	Tensorflow Website: Quantization aware training optimization accessed on 5/5/2023 link: https://blog.tensorflow.org/2020/04/quantization-aware-training-with-tensorflow-model-optimization-toolkit.html
+
 
 
 
