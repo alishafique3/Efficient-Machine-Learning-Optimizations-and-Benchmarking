@@ -35,27 +35,31 @@ In Quantization, precision of the model weights, activation, input and output is
 
 
 ## Methodology
-Base code for model training and dataset is provided in the [blog](https://www.pyimagesearch.com/2019/11/18/fire-and-smoke-detection-with-keras-and-deep-learning/) at Pyimagesearch by Adrian Rosebrock on November 18, 2019. 
+The base code for model training and dataset is provided in the [blog](https://www.pyimagesearch.com/2019/11/18/fire-and-smoke-detection-with-keras-and-deep-learning/) at Pyimagesearch by Adrian Rosebrock. 
 This project has contributed to the following: 
 1.	Model training is modified for pruning, clustering, and collaborative optimizations.
 2.	Post-Training optimization
-3.	Benchmarking in Android devices
+3.	Benchmarking in Android device
 
 ![Picture4](https://github.com/alishafique3/Efficient-Machine-Learning_Optimizations-and-Benchmarking/assets/17300597/944f3821-2b1a-4b18-b820-ff8909bc8561)
 
 
 
 ### Step1: Loading and preprocessing of the dataset
-A dataset can be accessed either by uploading it in the drive of google colab or google drive. In this project, the dataset has been uploaded on google drive and it is accessed in the code by mounting google drive in Colab.
-| Tables        | Are           | Cool  |
-| ------------- |:-------------:| -----:|
-| col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
+A dataset contains images of two calsses (NonFire and Fire). The total size of the dataset is 4008 images and it is split up into training dataset and validation dataset. Following are the hyperparameters used for regular model training.
+| Hyperparameters        | Value           |
+|:-------------:|:-------------:|
+| Dataset access      | Google Drive |
+| Classes      | 2 (nonFire,Fire)|
+| Batch Size | 64      |
+| No. of Epochs | 50      |
+| Train dataset | (3006,128,128,3)      |
+| Validation dataset | (1002,128,128,3)      |
+| Preprocessing | Resize, normalization, one-hot encoding and split      |
 
 
 ### Step2: Model architecture and training
-A deep neural network is used for classification. It contains convolutional layers, max pooling, and batch normalization layers. Adam optimizer is used for training with binary cross entropy loss function. It is trained for 50 epochs. Four different models are trained with different optimizations.
+A deep neural network is used for classification. It contains convolutional layers, max pooling layers, and batch normalization layers. Adam optimizer is used for training with binary cross entropy loss function. It is trained for 50 epochs. Four different models are trained with different optimizations. The model architecture is given below
 
 ![Picture5](https://github.com/alishafique3/Efficient-Machine-Learning_Optimizations-and-Benchmarking/assets/17300597/3b65816f-2b3a-4770-ba23-3832e8f8ee7f)
 
@@ -147,16 +151,16 @@ pqat_tflite_model = converter.convert()
 ```
 
 ### Step3: Benchmarking on Android Device
-ADB can be installed in windows and linux. I have found these videos very useful to setup [Link](https://www.youtube.com/watch?v=26GI3z6tI3E). and get familiarize with ADB [Link](https://www.youtube.com/watch?v=uOPcUjVl2YQ). Once ADB is setup, mobile can be controlled with computer with ADB commands via USB or wifi. Remember android device should be in USB Debugging mode or wireless debugging mode with USB or wifi connection respectively. Android emulator can also be used for benchmarking the models. Android emulator can be found using android studio. (Android studio has both emulator and ADB)
-`adb devices` will list all android devices/emulator connected with computer if it does not work or if it shows offline, try to connect android again kill ADB connection using `adb kill-server` and try again using `adb devices`
+Android Debugging Bridge(ADB) can be installed in Windows and Linux. I have found these videos very useful to setup [Link](https://www.youtube.com/watch?v=26GI3z6tI3E). and get familiarized with ADB [Link](https://www.youtube.com/watch?v=uOPcUjVl2YQ). Once ADB is set up, mobile can be controlled via computer with ADB commands using USB or wifi connectivity. Remember android devices should be in USB Debugging mode or Wireless debugging mode with USB or wifi connection respectively. Android emulator can also be used for benchmarking the models. Android emulator can be found using android studio. (Android Studio contains both an emulator and ADB).
+`adb devices` will list all Android devices/emulators connected to the computer. If it does not work or if it shows offline, try to connect Android again by removing the ADB connection using `adb kill-server` and try again using `adb devices`
 
-Once android device connection with computer is established, benchmarking file and target TFLite models will be sent to android device using ADB commands. There are two options of using the benchmark tool with Android. 
+Once the Android device connection with the computer is established with ADB, benchmarking files and target TFLite models will be sent to the Android device using ADB commands. There are two options for using the benchmark tool with Android. 
 1.	Native benchmark binary 
-2.	Android benchmark app, a better gauge of how the model would perform in the app.
+2.	Android benchmark app, a better tool to measure how the model would perform in the app.
 
-Both benchmarking files are available in android_aarch64 and android_arm at [Link](https://www.tensorflow.org/lite/performance/measurement). To find your android device specific architecture, you can download droid app from playstore.
+Both benchmarking files are available in android_aarch64 and android_arm at [Link](https://www.tensorflow.org/lite/performance/measurement). To find your Android device-specific architecture and system details, you can download a droid hardware app or similar app from Play Store.
 #### Android benchmark app 
-once android benchmarking file is downloaded, keep TFLite models and Android benchmark app in same folder and open terminal in that folder, start following lines
+once Android benchmarking file is downloaded, keep TFLite models and Android benchmark app in same folder and open terminal in that folder, start following lines
 ```python
 adb devices
 adb install -r -d -g android_aarch64_benchmark_model.apk  # for android_aarch64 benchmarking  file
@@ -166,7 +170,7 @@ adb logcat | findstr "Inference timings"
 ```
 
 #### Native benchmark binary
-once android benchmarking file is downloaded, keep TFLite models and Android benchmark app in same folder and open terminal in that folder, start following lines
+once Android benchmarking file is downloaded, keep TFLite models and Android benchmark app in same folder and open terminal in that folder, start following lines
 ```python
 adb push android_aarch64_benchmark_model /data/local/tmp # for android_aarch64 benchmarking  file
 adb shell chmod +x /data/local/tmp/android_aarch64_benchmark_model
@@ -197,15 +201,15 @@ You can specify more optional parameters for running the benchmark.
 In this project, different optimized models have been compared on android devices. Dynamic quantization plays remarkably well among these optimized models. This project can be extended on different datasets, models and hardware to see the performance of optimization techniques.
 
 ## References
-1.	Pyimagesearch Website: Fire and smoke detection with keras and deep learning accessed on 4/21/2023 link: https://www.pyimagesearch.com/2019/11/18/fire-and-smoke-detection-with-keras-and-deep-learning/
-2.	Youtube Website: tinyML Talks: A Practical guide to neural network quantization accessed on 5/2/2023 link: tinyML Talks: A Practical Guide to Neural Network Quantization 
-3.	Medium Website: Neural Network Compression using Quantization accessed on 4/27/2023 link: https://medium.com/sharechat-techbyte/neural-network-compression-using-quantization-328d22e8855d
-4.	Tensorflow Website: Performance Measurement accessed on 5/5/2023 link: https://www.tensorflow.org/lite/performance/measurement
-5.	Tensorflow Website: Post Training Quantization accessed on 5/3/2023 link: https://www.tensorflow.org/lite/performance/post_training_quantization#dynamic_range_quantization
-6.	Tensorflow Website: Model Optimization Pruning accessed on 5/3/2023 link: https://www.tensorflow.org/model_optimization/guide/pruning
-7.	Tensorflow Website: Weight clustering accessed on 5/1/2023 link: https://blog.tensorflow.org/2020/08/tensorflow-model-optimization-toolkit-weight-clustering-api.html
-8.	Tensorflow Website: pruning accessed on 5/4/2023 link: https://blog.tensorflow.org/2019/05/tf-model-optimization-toolkit-pruning-API.html
-9.	Tensorflow Website: Quantization aware training optimization accessed on 5/5/2023 link: https://blog.tensorflow.org/2020/04/quantization-aware-training-with-tensorflow-model-optimization-toolkit.html
+1.	Pyimagesearch Website: Fire and smoke detection with Keras and deep learning link: https://www.pyimagesearch.com/2019/11/18/fire-and-smoke-detection-with-keras-and-deep-learning/
+2.	Youtube Website: tinyML Talks: A Practical guide to neural network quantization link: https://www.youtube.com/watch?v=KASuxB3XoYQ 
+3.	Medium Website: Neural Network Compression using Quantization link: https://medium.com/sharechat-techbyte/neural-network-compression-using-quantization-328d22e8855d
+4.	Tensorflow Website: Performance Measurement link: https://www.tensorflow.org/lite/performance/measurement
+5.	Tensorflow Website: Post Training Quantization link: https://www.tensorflow.org/lite/performance/post_training_quantization#dynamic_range_quantization
+6.	Tensorflow Website: Model Optimization Pruning link: https://www.tensorflow.org/model_optimization/guide/pruning
+7.	Tensorflow Website: Weight clustering link: https://blog.tensorflow.org/2020/08/tensorflow-model-optimization-toolkit-weight-clustering-api.html
+8.	Tensorflow Website: pruning link: https://blog.tensorflow.org/2019/05/tf-model-optimization-toolkit-pruning-API.html
+9.	Tensorflow Website: Quantization aware training optimization link: https://blog.tensorflow.org/2020/04/quantization-aware-training-with-tensorflow-model-optimization-toolkit.html
 
 
 
