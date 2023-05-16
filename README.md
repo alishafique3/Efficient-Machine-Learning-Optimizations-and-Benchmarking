@@ -30,7 +30,8 @@ Clustering, also called weight sharing, helps to make models more memory-efficie
 
 ### Quantization
 In Quantization, precision of the model weights, activation, input and output is decreased by reducing the the number of bits representing numerical values. Using lower precision such as FP16 or INT8 as compared to FP32, makes the model memory-efficient and helps in faster execution. In this technique, high-precision values are mapped into lower-precision values using quantization-aware training, post-training quantization or hybrid quantization which is combination of both. Quantization is helpful for deploying models in resource-constraied edge devices as it reduces computational and memory requirements with acceptable accuracy.
-![Picture6](https://github.com/alishafique3/Efficient-Machine-Learning_Optimizations-and-Benchmarking/assets/17300597/7d94bbe6-5934-4499-a4da-f4a2076f8438)
+![Picture6](https://github.com/alishafique3/Efficient-Machine-Learning_Optimizations-and-Benchmarking/assets/17300597/6f1fb35e-e79e-4d70-9163-393726c12939)
+
 
 
 ## Methodology
