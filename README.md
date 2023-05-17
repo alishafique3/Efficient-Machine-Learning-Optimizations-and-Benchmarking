@@ -165,17 +165,17 @@ once Android benchmarking file is downloaded, keep TFLite models and Android ben
 adb devices
 adb install -r -d -g android_aarch64_benchmark_model.apk  # for android_aarch64 benchmarking  file
 adb push mobilenet.tflite /data/local/tmp # for model  file
-adb shell am start -S \-n org.tensorflow.lite.benchmark/.BenchmarkModelActivity \--es args '"--graph=/data/local/tmp/mobilenet.tflite \--num_threads=4"'
+adb shell am start -S -n org.tensorflow.lite.benchmark/.BenchmarkModelActivity \--es args '"--graph=/data/local/tmp/mobilenet.tflite --num_threads=4"'
 adb logcat | findstr "Inference timings"
 ```
 
 #### Native benchmark binary
-once Android benchmarking file is downloaded, keep TFLite models and Android benchmark app in same folder and open terminal in that folder, start following lines
+once the Native benchmarking file is downloaded, keep the TFLite models and the Native benchmark file in the same folder and open the terminal in that folder, start following the lines
 ```python
 adb push android_aarch64_benchmark_model /data/local/tmp # for android_aarch64 benchmarking  file
 adb shell chmod +x /data/local/tmp/android_aarch64_benchmark_model
 adb push mobilenet.tflite /data/local/tmp # for model  file
-adb shell /data/local/tmp/android_aarch64_benchmark_model \--graph=/data/local/tmp/mobilenet.tflite \--num_threads=4
+adb shell /data/local/tmp/android_aarch64_benchmark_model --graph=/data/local/tmp/mobilenet.tflite --num_threads=4
 ```
 
 graph is a required parameter.
