@@ -139,15 +139,15 @@ opt = tf.keras.optimizers.Adam(learning_rate=1e-5)
 pruned_model.compile(loss="binary_crossentropy", optimizer=opt,
   metrics=["accuracy"])
  ```
-After fine-tunning we need to remove pruning tf.variables that are needed for clustering otherwise it will increase the model size.
+After fine-tunning we need to remove pruning tf.variables that are needed for pruning otherwise it will increase the model size.
 ```python
 stripped_pruned_model = tfmot.sparsity.keras.strip_pruning(pruned_model)
 ```
-After clustering we will again apply post-training quantization to get quantized model.
+After pruning we will again apply post-training quantization to get quantized model.
 ```python
-converter = tf.lite.TFLiteConverter.from_keras_model(stripped_pruned_model)
-converter.optimizations = [tf.lite.Optimize.DEFAULT]
-pqat_tflite_model = converter.convert()
+converter5 = tf.lite.TFLiteConverter.from_keras_model(stripped_pruned_model)
+converter5.optimizations = [tf.lite.Optimize.DEFAULT]
+pqat_tflite_model = converter5.convert()
 ```
 
 ### Step3: Benchmarking on Android Device
