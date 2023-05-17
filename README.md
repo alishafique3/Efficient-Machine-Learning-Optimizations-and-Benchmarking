@@ -189,7 +189,7 @@ You can specify more optional parameters for running the benchmark.
 *	`use_hexagon`: bool (default=false) Use Hexagon delegate. This delegate leverages the Qualcomm Hexagon library to execute quantized kernels on the DSP. Note that the delegate is intended to complement NNAPI functionality, particularly for devices where NNAPI DSP acceleration is unavailable
 
 ## Result
-Android Device use for this project is Xiami Mi A2 with octacore processor and Adreno512 GPU. During benchmarking, 4 CPU threads are used. Runtime memory and model size are in MB while inference time is an average time in microseconds. 
+Android Device use for this project is Xiaomi Mi A2 with octacore processor and Adreno512 GPU. During benchmarking, 4 CPU threads are used. Runtime memory and model size are in MB while inference time is an average time in microseconds. 
 | Optimization Technique        | Size           | InferTime_CPU  | Runtime_Memory_CPU  | InferTime_GPU  | Runtime_Memory_GPU  | InferTime_NNAPI  | Runtime_Memory_NNAPI  |
 :-------------:|:-------------:|:-------------:|:-------------:|:-------------:|:-------------:|:-------------:|:-------------:|
 | Base_Model No Optimization      | 8.5 | 6719.84 | 11.4      | 5175.1 | 49.4 | 9382      | 11.46 |
