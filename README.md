@@ -211,6 +211,7 @@ In this project, different optimized models have been compared on android device
 7.	Tensorflow Website: Weight clustering link: https://blog.tensorflow.org/2020/08/tensorflow-model-optimization-toolkit-weight-clustering-api.html
 8.	Tensorflow Website: pruning link: https://blog.tensorflow.org/2019/05/tf-model-optimization-toolkit-pruning-API.html
 9.	Tensorflow Website: Quantization aware training optimization link: https://blog.tensorflow.org/2020/04/quantization-aware-training-with-tensorflow-model-optimization-toolkit.html
+10.	Icon reference on website: https://www.stickpng.com/img/bots-and-robots/android-robot-sideview-character  
 
 
 
