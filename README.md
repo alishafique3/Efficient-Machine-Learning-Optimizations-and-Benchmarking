@@ -1,4 +1,4 @@
-# Efficient Machine Learning Inference: Optimizations and Benchmarking
+# Inference Optimizations and Benchmarking on Android
 Deep learning is becoming popular nowadays. It is being used in different applications such as classification, segmentation, pose estimation, augmented reality and self-driving cars. The primary goal in deep learning applications is to achieve accuracy. This can be accomplished using big models but these complex models give rise to several issues in real-time applications. These real-time applications run on edge devices have limited memory and computation resources that results in reduction of model inference performance. 
 
 Model inference can be improved using optimization techniques such as pruning, clustering and quantization. Optimized models enable efficient use of memory and make computations simple, thereby resulting in the following advantages
