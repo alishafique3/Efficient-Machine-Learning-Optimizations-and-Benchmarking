@@ -1,14 +1,14 @@
 # Inference Optimizations and Benchmarking on Android
-Deep learning is becoming popular nowadays. It is being used in different applications such as classification, segmentation, pose estimation, augmented reality and self-driving cars. The primary goal in deep learning applications is to achieve accuracy. This can be accomplished using big models but these complex models give rise to several issues in real-time applications. These real-time applications run on edge devices have limited memory and computation resources that results in reduction of model inference performance. 
+Deep learning is becoming popular nowadays. It is being used in different applications such as classification, segmentation, pose estimation, augmented reality, and self-driving cars. The primary goal in deep learning applications is to achieve accuracy. This can be accomplished using big models but these complex models give rise to several issues in real-time applications. These real-time applications run on edge devices that have limited memory and computation resources result in the reduction of model inference performance. 
 
-Model inference can be improved using optimization techniques such as pruning, clustering and quantization. Optimized models enable efficient use of memory and make computations simple, thereby resulting in the following advantages
+Model inference can be improved using optimization techniques such as pruning, clustering, and quantization. Optimized models enable efficient use of memory and make computations simple, thereby resulting in the following advantages
 
-1. **Memory Usage:** using Integer or low-bits bits for input, weights, activations, and output give rise to less use of memory
-2. **Power Consumption:** less memory access and simpler computation reduce power consumption significantly
-3. **Latency:** less memory access and simpler computation also speed up the inference
+1. **Memory Usage:** Using integer or low-bits for input, weights, activations, and output gives rise to less use of memory
+2. **Power Consumption:** Less memory access and simpler computation reduce power consumption significantly
+3. **Latency:** Less memory access and simpler computation also speed up the inference
 4. **Silicon Area:** Integer or low-bits require less silicon area for computational hardware as compared to floating bits
 
-In this project, tensorflow keras is used to develop and train CNN model for classifiying fire and non-fire dataset. Model is optimized using tensorflow model optimization library. Optimized model is then converted into Tensorlite format. The performance of Tensorlite model is bechmarked on Android device using TensorFlow Lite benchmark tools. These tools measure several important performance metrics:
+In this project, TensorFlow Keras is used to develop and train the CNN model for classifying fire and non-fire datasets. The model is optimized using TensorFlow model optimization library. The optimized model is then converted into Tensorlite format. The performance of the Tensorlite model is benchmarked on Android device using TensorFlow Lite benchmark tools. These tools measure several important performance metrics:
 * Initialization time
 * Inference time of warmup state
 * Inference time of steady state
@@ -29,7 +29,7 @@ Clustering, also called weight sharing, helps to make models more memory-efficie
 
 
 ### Quantization
-In Quantization, precision of the model weights, activation, input and output is decreased by reducing the the number of bits representing numerical values. Using lower precision such as FP16 or INT8 as compared to FP32, makes the model memory-efficient and helps in faster execution. In this technique, high-precision values are mapped into lower-precision values using quantization-aware training, post-training quantization or hybrid quantization which is combination of both. Quantization is helpful for deploying models in resource-constraied edge devices as it reduces computational and memory requirements with acceptable accuracy.
+In Quantization, the precision of the model weights, activation, input, and output is decreased by reducing the number of bits representing numerical values. Using lower precision such as FP16 or INT8 as compared to FP32, makes the model memory-efficient and helps in faster execution. In this technique, high-precision values are mapped into lower-precision values using quantization-aware training, post-training quantization, or hybrid quantization which is the combination of both. Quantization is helpful for deploying models in resource-constrained edge devices as it reduces computational and memory requirements with acceptable accuracy.
 ![Picture6](https://github.com/alishafique3/Efficient-Machine-Learning_Optimizations-and-Benchmarking/assets/17300597/6f1fb35e-e79e-4d70-9163-393726c12939)
 
 
@@ -55,7 +55,7 @@ A dataset contains images of two calsses (NonFire and Fire). The total size of t
 | No. of Epochs | 50      |
 | Train dataset | (3006,128,128,3)      |
 | Validation dataset | (1002,128,128,3)      |
-| Preprocessing | Resize, normalization, one-hot encoding and split      |
+| Preprocessing | Resize, normalization, one-hot encoding, and split      |
 
 
 ### Step2: Model architecture and training
@@ -65,7 +65,7 @@ A deep neural network is used for classification. It contains convolutional laye
 
 #### Unoptimized Baseline Model:
 In this model, training is done with no optimization. This model is used to compare with optimized versions. This model is converted into TensorLite format. 
-Baseline model is developed using following code:
+The baseline model is developed using the following code:
 ```python
 converter1 = tf.lite.TFLiteConverter.from_keras_model(model)
 baseline_tflite_model = converter1.convert()
@@ -109,19 +109,19 @@ clustered_model.summary()
 ```
 After Fine-tuning: 
 
-After fine-tunning we need to remove clustering tf.variables that are needed for clustering otherwise it will increase the model size.
+After fine-tuning we need to remove clustering tf.variables that are needed for clustering otherwise it will increase the model size.
 ```python 
 stripped_clustered_model = tfmot.clustering.keras.strip_clustering(clustered_model)
 ```
-After clustering we will again apply post-training quantization to get quantized model.
+After clustering, we will again apply post-training quantization to get a quantized model.
 ```python
 Converter4 = tf.lite.TFLiteConverter.from_keras_model(stripped_clustered_model)
 Converter4.optimizations = [tf.lite.Optimize.DEFAULT]
 quantized_tflite_model = converter4.convert()
 ```
 #### Pruning and Quantized Model
-In this model, training is done with regular model then fine tuning is done with pruning optimization. In the end, the model is converted with dynamic range quantization during tensorlite conversion process. 
-After Training, Fine Tuning stage:
+In this model, training is done with a regular model then fine-tuning is done with pruning optimization. In the end, the model is converted with dynamic range quantization during Tensorlite conversion process. 
+After Training, fine-tuning stage:
 ```python
 prune_low_magnitude = tfmot.sparsity.keras.prune_low_magnitude
 pruning_params = {
@@ -139,7 +139,7 @@ opt = tf.keras.optimizers.Adam(learning_rate=1e-5)
 pruned_model.compile(loss="binary_crossentropy", optimizer=opt,
   metrics=["accuracy"])
  ```
-After fine-tunning we need to remove pruning tf.variables that are needed for pruning otherwise it will increase the model size.
+After fine-tuning we need to remove pruning tf.variables that are needed for pruning otherwise it will increase the model size.
 ```python
 stripped_pruned_model = tfmot.sparsity.keras.strip_pruning(pruned_model)
 ```
@@ -151,7 +151,7 @@ pqat_tflite_model = converter5.convert()
 ```
 
 ### Step3: Benchmarking on Android Device
-Android Debugging Bridge(ADB) can be installed in Windows and Linux. I have found these videos very useful to setup [Link](https://www.youtube.com/watch?v=26GI3z6tI3E). and get familiarized with ADB [Link](https://www.youtube.com/watch?v=uOPcUjVl2YQ). Once ADB is set up, mobile can be controlled via computer with ADB commands using USB or wifi connectivity. Remember android devices should be in USB Debugging mode or Wireless debugging mode with USB or wifi connection respectively. Android emulator can also be used for benchmarking the models. Android emulator can be found using android studio. (Android Studio contains both an emulator and ADB).
+Android Debugging Bridge(ADB) can be installed in Windows and Linux. I have found these videos very useful to setup [Link](https://www.youtube.com/watch?v=26GI3z6tI3E). and get familiarized with ADB [Link](https://www.youtube.com/watch?v=uOPcUjVl2YQ). Once ADB is set up, mobile can be controlled via computer with ADB commands using USB or wifi connectivity. Remember android devices should be in USB Debugging mode or Wireless debugging mode with USB or wifi connection respectively. Android emulator can also be used for benchmarking the models. Android emulator can be found using Android Studio. (Android Studio contains both an emulator and ADB).
 `adb devices` will list all Android devices/emulators connected to the computer. If it does not work or if it shows offline, try to connect Android again by removing the ADB connection using `adb kill-server` and try again using `adb devices`
 
 Once the Android device connection with the computer is established with ADB, benchmarking files and target TFLite models will be sent to the Android device using ADB commands. There are two options for using the benchmark tool with Android. 
@@ -182,35 +182,35 @@ graph is a required parameter.
 *	graph: string 
 The path to the TFLite model file.
 You can specify more optional parameters for running the benchmark.
-*	`num_threads`: int (default=1) The number of threads to use for running TFLite interpreter. A thread is a virtual component that handles the tasks of a CPU core. Multithreading is the ability of the CPU to divide up the work among multiple threads instead of giving it to a single core, to enable concurrent processing. The multiple threads are processed by the different CPU cores in parallel, to speed up performance and save time.
-*	`use_gpu`: bool (default=false) you can enable use of GPU-accelerated execution of your models using a delegate. Delegates act as hardware drivers for TensorFlow Lite, allowing you to run the code of your model on GPU processors.
-*	`use_nnapi`: bool (default=false) Use Android Neural Networks API (NNAPI) delegate.  It provides acceleration for TensorFlow Lite models on Android devices with supported hardware accelerators including, Graphics Processing Unit (GPU), Digital Signal Processor (DSP) and Neural Processing Unit (NPU).
+*	`num_threads`: int (default=1) The number of threads to use for running the TFLite interpreter. A thread is a virtual component that handles the tasks of a CPU core. Multithreading is the ability of the CPU to divide up the work among multiple threads instead of giving it to a single core, to enable concurrent processing. The multiple threads are processed by the different CPU cores in parallel, to speed up performance and save time.
+*	`use_gpu`: bool (default=false) you can enable the use of GPU-accelerated execution of your models using a delegate. Delegates act as hardware drivers for TensorFlow Lite, allowing you to run the code of your model on GPU processors.
+*	`use_nnapi`: bool (default=false) Use Android Neural Networks API (NNAPI) delegate.  It provides acceleration for TensorFlow Lite models on Android devices with supported hardware accelerators including, Graphics Processing Unit (GPU), Digital Signal Processor (DSP), and Neural Processing Unit (NPU).
 *	`use_xnnpack`: bool (default=false) Use XNNPACK delegate. XNNPACK is a highly optimized library of neural network inference operators for ARM, x86, and WebAssembly architectures in Android, iOS, Windows, Linux, macOS, and Emscripten environments.
 *	`use_hexagon`: bool (default=false) Use Hexagon delegate. This delegate leverages the Qualcomm Hexagon library to execute quantized kernels on the DSP. Note that the delegate is intended to complement NNAPI functionality, particularly for devices where NNAPI DSP acceleration is unavailable
 
 ## Result
-Android Device use for this project is Xiaomi Mi A2 with octacore processor and Adreno512 GPU. During benchmarking, 4 CPU threads are used. Runtime memory and model size are in MB while inference time is an average time in microseconds. 
-| Optimization Technique        | Size (MB)           | InferTime_CPU (ms)  | Runtime_Memory_CPU (MB)  | InferTime_GPU (ms)  | Runtime_Memory_GPU (MB)  | InferTime_NNAPI (ms)  | Runtime_Memory_NNAPI (MB)  |
-:-------------:|:-------------:|:-------------:|:-------------:|:-------------:|:-------------:|:-------------:|:-------------:|
-| Base_Model No Optimization      | 8.5 | 6.72 | 11.4      | 5.17 | 49.4 | 9.38      | 11.46 |
-| Dynamic Range Quantized      | 2.14 | 8.37 | 5.7      | 5.07 | 43.34 | 8.30      | 5.75 |
-| Float16 Quantized      | 4.26 | 7.56 | 15.69      | 5.17 | 45.34 | 6.55      | 16.05 |
-| Clustered and Quantized      | 2.14 | 8.89 | 5.98      | 5.21 | 43.35 | 8.49      | 5.9 |
-| Pruned and Quantized      | 2.14 | 8.03 | 5.88      | 5.05 | 43.32 | 7.48      | 6.02 |
+The Android Device used for this project is Xiaomi Mi A2 with octa-core processor and Adreno512 GPU. During benchmarking, 4 CPU threads are used. Runtime memory and model size are in MB while inference time is an average time in microseconds. 
+| Optimization Technique        | Size (MB)           | InferTime_CPU (ms)  | InferTime_GPU (ms)  | InferTime_NNAPI (ms)  |
+:-------------:|:-------------:|:-------------:|:-------------:|:-------------:|
+| Base_Model No Optimization      | 8.5 | 6.72 | 5.17 | 9.38      |
+| Dynamic Range Quantized      | 2.14 | 8.37 | 5.07 | 8.30      |
+| Float16 Quantized      | 4.26 | 7.56 | 5.17 | 6.55      |
+| Clustered and Quantized      | 2.14 | 8.89 | 5.21 | 8.49      |
+| Pruned and Quantized      | 2.14 | 8.03 | 5.05 | 7.48      |
 
 ## Conclusion
-In this project, different optimized models have been compared on android device. Dynamic quantization plays remarkably well among these optimized models. This project can be extended on different datasets, models and hardware to see the performance of optimization techniques.
+In this project, different optimized models have been compared on Android devices. Dynamic quantization plays remarkably well among these optimized models. This project can be extended to different datasets, models, and hardware to see the performance of optimization techniques.
 
 ## References
 1.	Pyimagesearch Website: Fire and smoke detection with Keras and deep learning link: https://www.pyimagesearch.com/2019/11/18/fire-and-smoke-detection-with-keras-and-deep-learning/
-2.	Youtube Website: tinyML Talks: A Practical guide to neural network quantization link: https://www.youtube.com/watch?v=KASuxB3XoYQ 
+2.	YouTube Website: tinyML Talks: A Practical guide to neural network quantization link: https://www.youtube.com/watch?v=KASuxB3XoYQ 
 3.	Medium Website: Neural Network Compression using Quantization link: https://medium.com/sharechat-techbyte/neural-network-compression-using-quantization-328d22e8855d
 4.	Tensorflow Website: Performance Measurement link: https://www.tensorflow.org/lite/performance/measurement
 5.	Tensorflow Website: Post Training Quantization link: https://www.tensorflow.org/lite/performance/post_training_quantization#dynamic_range_quantization
 6.	Tensorflow Website: Model Optimization Pruning link: https://www.tensorflow.org/model_optimization/guide/pruning
 7.	Tensorflow Website: Weight clustering link: https://blog.tensorflow.org/2020/08/tensorflow-model-optimization-toolkit-weight-clustering-api.html
 8.	Tensorflow Website: pruning link: https://blog.tensorflow.org/2019/05/tf-model-optimization-toolkit-pruning-API.html
-9.	Tensorflow Website: Quantization aware training optimization link: https://blog.tensorflow.org/2020/04/quantization-aware-training-with-tensorflow-model-optimization-toolkit.html
+9.	Tensorflow Website: Quantization-aware training optimization link: https://blog.tensorflow.org/2020/04/quantization-aware-training-with-tensorflow-model-optimization-toolkit.html
 10.	Icon reference on website: https://www.stickpng.com/img/bots-and-robots/android-robot-sideview-character  
 
 
